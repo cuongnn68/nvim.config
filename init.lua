@@ -2,6 +2,12 @@
 vim.opt.expandtab = true -- Convert tabs to spaces
 vim.opt.shiftwidth = 2 -- Indent by 2 spaces
 vim.opt.tabstop = 2 -- Tab key = 2 spaces
+local os_name = vim.uv.os_uname().sysname
+if os_name == 'Windows_NT' then
+  vim.o.shell = 'pwsh'
+else
+  vim.o.shell = 'zsh'
+end
 
 -- Set <space> as the leader key
 -- See `:help mapleader`
