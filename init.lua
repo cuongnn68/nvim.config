@@ -1,4 +1,10 @@
 -- my stuff
+
+-- map Oil to O
+vim.api.nvim_create_user_command('O', function()
+  vim.cmd 'Oil'
+end, {})
+
 vim.opt.expandtab = true -- Convert tabs to spaces
 vim.opt.shiftwidth = 2 -- Indent by 2 spaces
 vim.opt.tabstop = 2 -- Tab key = 2 spaces
