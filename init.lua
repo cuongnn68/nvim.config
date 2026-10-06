@@ -593,6 +593,18 @@ require('lazy').setup({
       --  So, we create new capabilities with blink.cmp, and then broadcast that to the servers.
       local capabilities = require('blink.cmp').get_lsp_capabilities()
 
+      vim.lsp.config('roslyn_ls', {
+        cmd = { 'roslyn-language-server', '--stdio' },
+        capabilities = capabilities,
+        settings = {
+          ['csharp|background_analysis'] = {
+            dotnet_analyzer_diagnostics_scope = 'none',
+            dotnet_compiler_diagnostics_scope = 'openFiles',
+          },
+        },
+      })
+      vim.lsp.enable 'roslyn_ls'
+
       -- Enable the following language servers
       --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
       --
@@ -617,7 +629,6 @@ require('lazy').setup({
         --
 
         eslint = {},
-        csharp_ls = {},
         lua_ls = {
           -- cmd = { ... },
           -- filetypes = { ... },
@@ -889,8 +900,8 @@ require('lazy').setup({
   },
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
+    branch = 'main',
     build = ':TSUpdate',
-    main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
       ensure_installed = {
